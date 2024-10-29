@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Harsheen 💖</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Metaetiquetas para compartir en redes sociales -->
+  <meta property="og:title" content="Un regalo especial para Harsheen 💖">
+  <meta property="og:description" content="Una página hecha con mucho cariño para expresar mis sentimientos.">
+  <meta property="og:image" content="images/photo1.jpg"> <!-- Usa una imagen destacada de la carpeta images -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="URL_DE_TU_PAGINA"> <!-- Cambia esto con la URL del alojamiento -->
+  
+  <!-- Favicon -->
+  <link rel="icon" href="images/photo1.jpg" type="image/jpg">
+</head>
+<body>
+  <header>
+    <h1>Para Harsheen 💖</h1>
+  </header>
+  
+  <main>
+    <section class="intro">
+      <p>Este es un pequeño regalo para alguien muy especial.</p>
+      <p>Gracias por iluminar mis días y hacer cada momento especial.</p>
+      <p>Desde el momento en que nos conocimos, cada instante ha sido mágico. Gracias por tu risa, tu paciencia y tu cariño. No puedo esperar a ver qué más nos depara el futuro juntos.</p>
+    </section>
+
+    <section class="gallery">
+      <h2>Nuestras Memorias</h2>
+      <div class="photos" id="photoContainer">
+        <div class="photo-card" onclick="showMessage('Desde que llegaste a mi vida, todo ha cambiado para mejor...')">
+          <img src="images/photo1.jpg" alt="Momento especial 1">
+          <p>Un día inolvidable</p>
+        </div>
+        <div class="photo-card" onclick="showMessage('Cuando pienso en ti, mi corazón se llena de amor y felicidad...')">
+          <img src="images/photo2.jpg" alt="Momento especial 2">
+          <p>Una sonrisa que lo cambia todo</p>
+        </div>
+        <div class="photo-card" onclick="showMessage('Cada día que paso contigo es un regalo que atesoro en mi corazón...')">
+          <img src="images/photo3.jpg" alt="Momento especial 3">
+          <p>Recuerdos juntos</p>
+        </div>
+        <div class="photo-card" onclick="showMessage('Harsheen, cada vez que miro tus ojos, me doy cuenta de cuán afortunado soy...')">
+          <img src="images/photo4.jpg" alt="Momento especial 4">
+          <p>Un abrazo eterno</p>
+        </div>
+      </div>
+      
+      <!-- Botón "Más Cositas" -->
+      <button id="loadMoreButton" class="styled-button" onclick="openMorePhotos()">Más cositas</button>
+    </section>
+
+    <section class="messages">
+      <h2>Mensajes para Harsheen</h2>
+      <p>Espero que siempre recuerdes cuánto significas para mí.</p>
+      <p>Te quiero mucho, y esto es solo el comienzo de muchas más aventuras juntos.</p>
+      <p>Te agradezco cada sonrisa, cada abrazo, y todos esos pequeños momentos que hacen mi vida mejor.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Con cariño, Tu [Tu Nombre]</p>
+  </footer>
+
+  <!-- Modal para el mensaje -->
+  <div id="heartModal" class="modal">
+    <div class="message-box">
+      <p id="modalText">Mensaje de amor</p>
+    </div>
+  </div>
+
+  <!-- Modal para mostrar más imágenes -->
+  <div id="moreImagesModal" class="modal">
+    <div class="message-box" id="moreImagesContainer">
+      <h2>Más Imágenes</h2>
+      <div id="newPhotoContainer" class="photos"></div>
+      <button onclick="closeMorePhotos()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    function showMessage(message) {
+      const modal = document.getElementById('heartModal');
+      const modalText = document.getElementById('modalText');
+      modalText.innerText = message;
+      modal.style.display = 'flex';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('heartModal');
+      const moreImagesModal = document.getElementById('moreImagesModal');
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      } else if (event.target == moreImagesModal) {
+        closeMorePhotos();
+      }
+    }
+
+    function openMorePhotos() {
+      const moreImagesModal = document.getElementById('moreImagesModal');
+      const newPhotoContainer = document.getElementById('newPhotoContainer');
+      newPhotoContainer.innerHTML = ''; 
+
+      const newPhotos = [
+        { src: 'images/photo5.jpg', message: 'Tu sonrisa ilumina mi día...' },
+        { src: 'images/photo6.jpg', message: 'Cada momento a tu lado...' },
+        { src: 'images/photo7.jpg', message: 'Contigo aprendí que el amor...' },
+        { src: 'images/photo8.jpg', message: 'Tu risa es la melodía...' },
+        { src: 'images/photo9.jpg', message: 'A tu lado, cada día es...' },
+        { src: 'images/photo10.jpg', message: 'Eres la razón de mis...' },
+        { src: 'images/photo11.jpg', message: 'Gracias por ser mi apoyo...' },
+        { src: 'images/photo12.jpg', message: 'Cada instante contigo...' },
+        { src: 'images/photo13.jpg', message: 'Eres mi compañera perfecta...' },
+        { src: 'images/photo14.jpg', message: 'Te quiero más de lo que...' },
+      ];
+
+      newPhotos.forEach(photo => {
+        const photoCard = document.createElement('div');
+        photoCard.className = 'photo-card';
+        photoCard.onclick = () => openImageMessage(photo.message);
+        
+        const img = document.createElement('img');
+        img.src = photo.src;
+        img.alt = 'Momento especial';
+        
+        const p = document.createElement('p');
+        p.innerText = 'Un momento especial';
+
+        photoCard.appendChild(img);
+        photoCard.appendChild(p);
+        newPhotoContainer.appendChild(photoCard);
+      });
+
+      moreImagesModal.style.display = 'flex';
+    }
+
+    function openImageMessage(message) {
+      const messageWindow = window.open('', 'Mensaje de Imagen', 'width=400,height=200');
+      messageWindow.document.write(`
+        <html>
+          <head>
+            <title>Mensaje de Imagen</title>
+            <style>
+              body { font-family: Arial, sans-serif; padding: 20px; }
+              h2 { color: #ff007f; }
+              p { font-size: 1.2em; }
+            </style>
+          </head>
+          <body>
+            <h2>Mensaje Especial</h2>
+            <p>${message}</p>
+          </body>
+        </html>
+      `);
+      messageWindow.document.close();
+    }
+
+    function closeMorePhotos() {
+      const moreImagesModal = document.getElementById('moreImagesModal');
+      moreImagesModal.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
